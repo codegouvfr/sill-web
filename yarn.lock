@@ -1233,12 +1233,13 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codegouvfr/react-dsfr@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@codegouvfr/react-dsfr/-/react-dsfr-1.0.0.tgz#53f2b28d6d82e78c0fa52d1959eb2ba8882fe6f4"
-  integrity sha512-dHLzlpXNhSJ1hP53OkzgmkKer8fw5vzmbAzlqCr5p2L2vcspA17J/8LVZKLvPD1DJy3u9ydSZGNHeVygMsrJRQ==
+"@codegouvfr/react-dsfr@^1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@codegouvfr/react-dsfr/-/react-dsfr-1.9.2.tgz#db4925f52459d10ef4399cd5331acdab5f9ca55e"
+  integrity sha512-dZkcq+qmB5SuBHmht++ImV+PA0fwqiyaNxSqslQ5xrHCqkzISBcY5HOt9K+xXCZniFnHfovfvu3bR4JdG2gW1w==
   dependencies:
     tsafe "^1.6.3"
+    yargs-parser "^21.1.1"
 
 "@codegouvfr/sill@^1.20.5":
   version "1.20.5"
@@ -1893,6 +1894,11 @@
   version "1.4.14"
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.14.tgz#add4c98d341472a289190b424efbdb096991bb24"
   integrity sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==
+
+"@jridgewell/sourcemap-codec@^1.4.15":
+  version "1.4.15"
+  resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.15.tgz#d7c6e6755c78567a951e04ab52ef0fd26de59f32"
+  integrity sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==
 
 "@jridgewell/trace-mapping@0.3.9":
   version "0.3.9"
@@ -7734,14 +7740,14 @@ evt@^2.4.18:
     run-exclusive "^2.2.18"
     tsafe "^1.6.0"
 
-evt@^2.5.3:
-  version "2.5.3"
-  resolved "https://registry.yarnpkg.com/evt/-/evt-2.5.3.tgz#eda564afdda6dfe1da687bb54933706af3f844d6"
-  integrity sha512-wZKx0JgXaTOVOXI2saNVxINU6VToOHDowMwb3NRcU6l+C59eW3w9dZgNxjokiM8rvMgc7/11yFG0cSDxn4qxgA==
+evt@^2.5.7:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/evt/-/evt-2.5.7.tgz#55c5f8ff910f4b7531bfac91e963d4cb3231f253"
+  integrity sha512-dr7Wd16ry5F8WNU1xXLKpFpO3HsoAGg8zC48e08vDdzMzGWCP9/QFGt1PQptEEDh8SwYP3EL8M+d/Gb0kgUp6g==
   dependencies:
     minimal-polyfills "^2.2.3"
     run-exclusive "^2.2.19"
-    tsafe "^1.6.5"
+    tsafe "^1.6.6"
 
 exec-sh@^0.3.2:
   version "0.3.6"
@@ -9159,12 +9165,12 @@ husky@^4.3.8:
     slash "^3.0.0"
     which-pm-runs "^1.0.0"
 
-i18nifty@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/i18nifty/-/i18nifty-3.1.2.tgz#f82bdb9b6b40a038997790d82492db7d4cc72b67"
-  integrity sha512-QsHrFzH0DEEW2WPXKLyVjFEnEaL3n1W+9P9Ul7jCiyrRxdY1tGaBxNjZSoOYCoaZOMP5t2a6KRCuYa50gNUI/A==
+i18nifty@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/i18nifty/-/i18nifty-3.2.1.tgz#ee27e76cfdb8591d26ac980063567fac75a19c11"
+  integrity sha512-/exQ7rch7erPczJVy8gL+BD7TT24FfLFUvpLV1QW23tDB+tatq4/BN6j2V6nvADtn5GCFkhmWBe8ZzavDjQ3fQ==
   dependencies:
-    powerhooks "^1.0.5"
+    powerhooks "^1.0.9"
     tsafe "^1.6.5"
 
 iconv-lite@0.4.24:
@@ -10608,10 +10614,10 @@ jwt-decode@^3.1.2:
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
   integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
-keycloakify@^9.2.0:
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-9.2.0.tgz#236edadcc35f4ab039529577b26fc28c117bd55b"
-  integrity sha512-VbQ5EL7hvsEuoEr9pXd+2KDhVcNd4YOJuKG6+/pH0RfNeO6sow63WD8C+XiGY6HoEIKb22S2NNKR3mjclRaCrA==
+keycloakify@^9.6.3:
+  version "9.6.3"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-9.6.3.tgz#0b6b6dda6a41e5c0e2ce84de73d6459e8ddf2d2e"
+  integrity sha512-9mfCfe4UQU3/UuF7J/yjjzvlX/7opcaGacOC3XMLPvHcoGElqLUFavHmQEtgB7zKZBMdhNGkFncH14pWCazb6w==
   dependencies:
     "@babel/generator" "^7.22.9"
     "@babel/parser" "^7.22.7"
@@ -10620,10 +10626,10 @@ keycloakify@^9.2.0:
     cheerio "^1.0.0-rc.5"
     cli-select "^1.1.2"
     evt "^2.4.18"
+    magic-string "^0.30.7"
     make-fetch-happen "^11.0.3"
     minimal-polyfills "^2.2.2"
     minimist "^1.2.6"
-    path-browserify "^1.0.1"
     react-markdown "^5.0.3"
     recast "^0.23.3"
     rfc4648 "^1.5.2"
@@ -10937,6 +10943,13 @@ magic-string@^0.25.0, magic-string@^0.25.7:
   integrity sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==
   dependencies:
     sourcemap-codec "^1.4.8"
+
+magic-string@^0.30.7:
+  version "0.30.8"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.8.tgz#14e8624246d2bedba70d5462aa99ac9681844613"
+  integrity sha512-ISQTe55T2ao7XtlAStud6qwYPZjE4GK1S/BeVPus4jrq6JuOnQ00YKQC581RWhR122W7msZV263KzVeLoqidyQ==
+  dependencies:
+    "@jridgewell/sourcemap-codec" "^1.4.15"
 
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
@@ -13393,14 +13406,14 @@ postcss@^8.0.9, postcss@^8.2.15, postcss@^8.3.5, postcss@^8.4.19, postcss@^8.4.4
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-powerhooks@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/powerhooks/-/powerhooks-1.0.5.tgz#750a31856b079675e79dfbd462e569cb6ea4a996"
-  integrity sha512-Hy8OuHI+Ky3SIPtjcWCcUFqakdJjJB5Lnh26AHuoofUbO/G6LLe4h3jrFKQlbilY1DgpbJJzJOAyHEFmdp6byQ==
+powerhooks@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/powerhooks/-/powerhooks-1.0.9.tgz#a0835855b215999d2e03258a652500a012eee865"
+  integrity sha512-G2OWxB36sYPcz+KehB/6RJSE5DWPeWxpOgHZXJUCzyQ9AsSABwUNibrWVp7HwwNlIUpVpvKvQ1zpi8Fs6tyTxg==
   dependencies:
-    evt "^2.5.3"
+    evt "^2.5.7"
     memoizee "^0.4.15"
-    tsafe "^1.6.5"
+    tsafe "^1.6.6"
 
 prelude-ls@^1.2.1:
   version "1.2.1"
@@ -14063,10 +14076,10 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
-redux-clean-architecture@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/redux-clean-architecture/-/redux-clean-architecture-4.1.1.tgz#1914cee90525765648e9a52ac64e25e7c8dc6f1a"
-  integrity sha512-ZdaIM4mHoWdjkC6GNf1P3Hb/yY9n4oplxhnOZ7o2WvB2OoaV5GmBjhZsIj7llAnEh0Y92gOGPxrO9kgUO9Evuw==
+redux-clean-architecture@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/redux-clean-architecture/-/redux-clean-architecture-4.3.2.tgz#de5dab37d671a87db291974b3c51ba4dcc781878"
+  integrity sha512-UJ6lp223WqworsBlZ2h8w94Rz7BSqt8fr2HOQ1lJvSzvJO7dEwMBU3Q9j9u9y/HGckTj+tyGye1UgeRZ43kBuw==
   dependencies:
     "@reduxjs/toolkit" "^1.9.6"
     minimal-polyfills "^2.2.3"
@@ -16118,10 +16131,10 @@ tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.0.tgz#42bfed86f5787aeb41d031866c8f402429e0fddf"
   integrity sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==
 
-tss-react@^4.9.3:
-  version "4.9.3"
-  resolved "https://registry.yarnpkg.com/tss-react/-/tss-react-4.9.3.tgz#69ce18bcf83fe96d99d35f44a036c7b507f66eff"
-  integrity sha512-TqI0kBFmgW0f5YIOD2PMdHu6FnqSxVDUf5uJ7+gVkhemtMfwdlFpvXpddgSesktizr9PU9hY2nZ+kNnf0KQb9A==
+tss-react@^4.9.4:
+  version "4.9.4"
+  resolved "https://registry.yarnpkg.com/tss-react/-/tss-react-4.9.4.tgz#037603ed2f8765c2f208ac1c75e9293753aa18cd"
+  integrity sha512-4o+XFdaTcraNEIsCRxKiEX7g6xhcsdSxfHRjos3Kg9GbYIpzfK4M2MHMETTuXT54nUrldtnkipNC003v/q5KVg==
   dependencies:
     "@emotion/cache" "*"
     "@emotion/serialize" "*"
@@ -17466,6 +17479,11 @@ yargs-parser@^20.2.2, yargs-parser@^20.2.9:
   version "20.2.9"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.9.tgz#2eb7dc3b0289718fc295f362753845c41a0c94ee"
   integrity sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==
+
+yargs-parser@^21.1.1:
+  version "21.1.1"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.1.1.tgz#9096bceebf990d21bb31fa9516e0ede294a77d35"
+  integrity sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==
 
 yargs@^16.2.0:
   version "16.2.0"
