@@ -131,52 +131,52 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
 
-  create_github_release:
-    name: "Create release notes"
-    runs-on: ubuntu-latest
-    needs:
-      - trigger_production_deploy
-      - check_if_version_upgraded
-      - create_tag
-    if: |
-      needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true' &&
-      (
-        github.event_name == 'push' ||
-        needs.check_if_version_upgraded.outputs.is_release_beta == 'true'
-      )
-#     We create a release only when all of the above are validated:
-#     - we are on default branch
-#     - version has been upgraded
-#     - we push to production
-    env:
-      TO_VERSION: ${{ needs.check_if_version_upgraded.outputs.to_version }}
-    steps:
-      - name: Get tag of latest release
-        id: get-latest-release-tag
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const latestRelease = await github.request(`GET /repos/${{ github.repository }}/releases/latest`)
-            return latestRelease.data.tag_name
-          result-encoding: string
-      - name: Generate release notes content from latest release
-        id: generate-release-notes
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const releaseNotes = await github.request(`POST /repos/${{ github.repository }}/releases/generate-notes`, {
-              tag_name: `v${{ env.TO_VERSION }}`,
-              previous_tag_name: `${{steps.get-latest-release-tag.outputs.result}}` })
-            core.setOutput("name", releaseNotes.data.name);
-            core.setOutput("body", releaseNotes.data.body);
-      - name: Create release notes on github
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            await github.request(`POST /repos/${{ github.repository }}/releases`, {
-              tag_name: `v${{ env.TO_VERSION }}`,
-              name: `${{ steps.generate-release-notes.outputs.name }}`,
-              body: `${{ steps.generate-release-notes.outputs.body }}`})
+#  create_github_release:
+#    name: "Create release notes"
+#    runs-on: ubuntu-latest
+#    needs:
+#      - trigger_production_deploy
+#      - check_if_version_upgraded
+#      - create_tag
+#    if: |
+#      needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true' &&
+#      (
+#        github.event_name == 'push' ||
+#        needs.check_if_version_upgraded.outputs.is_release_beta == 'true'
+#      )
+##     We create a release only when all of the above are validated:
+##     - we are on default branch
+##     - version has been upgraded
+##     - we push to production
+#    env:
+#      TO_VERSION: ${{ needs.check_if_version_upgraded.outputs.to_version }}
+#    steps:
+#      - name: Get tag of latest release
+#        id: get-latest-release-tag
+#        uses: actions/github-script@v7
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          script: |
+#            const latestRelease = await github.request(`GET /repos/${{ github.repository }}/releases/latest`)
+#            return latestRelease.data.tag_name
+#          result-encoding: string
+#      - name: Generate release notes content from latest release
+#        id: generate-release-notes
+#        uses: actions/github-script@v7
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          script: |
+#            const releaseNotes = await github.request(`POST /repos/${{ github.repository }}/releases/generate-notes`, {
+#              tag_name: `v${{ env.TO_VERSION }}`,
+#              previous_tag_name: `${{steps.get-latest-release-tag.outputs.result}}` })
+#            core.setOutput("name", releaseNotes.data.name);
+#            core.setOutput("body", releaseNotes.data.body);
+#      - name: Create release notes on github
+#        uses: actions/github-script@v7
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          script: |
+#            await github.request(`POST /repos/${{ github.repository }}/releases`, {
+#              tag_name: `v${{ env.TO_VERSION }}`,
+#              name: `${{ steps.generate-release-notes.outputs.name }}`,
+#              body: `${{ steps.generate-release-notes.outputs.body }}`})
