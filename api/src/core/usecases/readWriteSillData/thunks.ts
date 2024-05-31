@@ -800,7 +800,7 @@ const privateThunks = {
 
                     try {
                         await Promise.all([
-                            dbApi.updateDb({ newDb, commitMessage }),
+                            dbApi.updateDb({ m, commitMessage }),
                             dbApi.updateCompiledData({ newCompiledData, commitMessage })
                         ]);
                     } catch (error) {

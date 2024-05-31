@@ -15,8 +15,8 @@ import {
     type GetSoftwareExternalData,
     type SoftwareExternalData,
     type LocalizedString
-} from "../ports/GetSoftwareExternalData";
-import type { Entity, DataValue, LocalizedString as WikiDataLocalizedString } from "../../tools/WikidataEntity";
+} from "../../ports/GetSoftwareExternalData";
+import type { Entity, DataValue, LocalizedString as WikiDataLocalizedString } from "../../../tools/WikidataEntity";
 const { resolveLocalizedString } = createResolveLocalizedString({
     "currentLanguage": id<Language>("en"),
     "fallbackLanguage": "en"
