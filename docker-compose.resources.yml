@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:16
+    shm_size: 256m
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_LOG_STATEMENTS: all
+      POSTGRES_DB: sill
+      POSTGRES_USER: sill
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg_password}
+    volumes:
+      - ./docker-data/test-postgresql:/var/lib/postgresql/data
+
+#  To create an easy-to-use interface for PostgreSQL administration,
+#  you can use the Adminer web interface.
+#
+#  adminer:
+#    image: adminer
+#    ports:
+#      - "8090:8080"
