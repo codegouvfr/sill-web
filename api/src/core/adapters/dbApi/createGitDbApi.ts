@@ -1,13 +1,10 @@
-import type { DbApi, Db } from "../../ports/DbApi";
-import { gitSsh } from "../../../tools/gitSsh";
 import { Deferred } from "evt/tools/Deferred";
-import { type CompiledData, compiledDataPrivateToPublic } from "../../ports/CompileData";
 import * as fs from "fs";
 import { join as pathJoin } from "path";
 import type { ReturnType } from "tsafe";
-import type { DbApi, Db } from "../../ports/DbApi";
 import { gitSsh } from "../../../tools/gitSsh";
 import { type CompiledData, compiledDataPrivateToPublic } from "../../ports/CompileData";
+import type { Db, DbApi } from "../../ports/DbApi";
 
 export const compiledDataBranch = "compiled-data";
 const compiledDataPrivateJsonRelativeFilePath = "compiledData_private.json";
@@ -177,3 +174,15 @@ export function createGitDbApi(params: GitDbApiParams): Db.DbApiAndInitializeCac
         initializeDbApiCache
     };
 }
+
+type Original = { salut: string };
+
+type OnlyOriginal = Original & { [K in keyof Original]: Original[K] } & {};
+
+const o: Original = { salut: "salut" };
+const x = { salut: "salut", truc: "truc" };
+
+const b: OnlyOriginal = { ...x };
+const b2: OnlyOriginal = { ...o };
+
+console.log({ b, o, b2 });
