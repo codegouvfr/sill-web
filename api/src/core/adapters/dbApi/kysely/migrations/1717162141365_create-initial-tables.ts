@@ -1,4 +1,4 @@
-import { Kysely, sql } from "kysely";
+import { Kysely } from "kysely";
 
 export async function up(db: Kysely<any>): Promise<void> {
     await db.schema
@@ -15,8 +15,8 @@ export async function up(db: Kysely<any>): Promise<void> {
         .addColumn("id", "serial", col => col.primaryKey())
         .addColumn("name", "text", col => col.notNull())
         .addColumn("description", "text", col => col.notNull())
-        .addColumn("referencedSinceTime", "integer", col => col.notNull())
-        .addColumn("updateTime", "integer", col => col.notNull())
+        .addColumn("referencedSinceTime", "bigint", col => col.notNull())
+        .addColumn("updateTime", "bigint", col => col.notNull())
         .addColumn("dereferencing", "jsonb")
         .addColumn("isStillInObservation", "boolean", col => col.notNull())
         .addColumn("parentSoftwareWikidataId", "text")
@@ -42,8 +42,8 @@ export async function up(db: Kysely<any>): Promise<void> {
 
     await db.schema
         .createTable("software_users")
-        .addColumn("softwareId", "integer", col => col.notNull())
-        .addColumn("agentId", "text", col => col.notNull())
+        .addColumn("softwareId", "integer", col => col.notNull().references("softwares.id").onDelete("cascade"))
+        .addColumn("agentId", "integer", col => col.notNull().references("agents.id").onDelete("cascade"))
         .addColumn("useCaseDescription", "text", col => col.notNull())
         .addColumn("os", "text")
         .addColumn("version", "text", col => col.notNull())
@@ -52,25 +52,24 @@ export async function up(db: Kysely<any>): Promise<void> {
 
     await db.schema
         .createTable("software_referents")
-        .addColumn("softwareId", "integer", col => col.notNull())
-        .addColumn("agentId", "text", col => col.notNull())
+        .addColumn("softwareId", "integer", col => col.notNull().references("softwares.id").onDelete("cascade"))
+        .addColumn("agentId", "integer", col => col.notNull().references("agents.id").onDelete("cascade"))
         .addColumn("useCaseDescription", "text", col => col.notNull())
-        .addColumn("os", "text")
-        .addColumn("version", "text", col => col.notNull())
+        .addColumn("isExpert", "boolean", col => col.notNull())
         .addColumn("serviceUrl", "text")
         .execute();
 
     await db.schema
         .createTable("instances")
         .addColumn("id", "integer", col => col.notNull())
-        .addColumn("mainSoftwareSillId", "integer", col => col.notNull())
+        .addColumn("mainSoftwareSillId", "integer", col => col.notNull().references("softwares.id").onDelete("cascade"))
+        .addColumn("addedByAgentEmail", "text", col => col.notNull())
         .addColumn("organization", "text", col => col.notNull())
         .addColumn("targetAudience", "text", col => col.notNull())
         .addColumn("publicUrl", "text")
         .addColumn("otherSoftwareWikidataIds", "jsonb")
-        .addColumn("addedByAgentEmail", "text", col => col.notNull())
-        .addColumn("referencedSinceTime", "integer", col => col.notNull())
-        .addColumn("updateTime", "integer", col => col.notNull())
+        .addColumn("referencedSinceTime", "bigint", col => col.notNull())
+        .addColumn("updateTime", "bigint", col => col.notNull())
         .execute();
 }
 

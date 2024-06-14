@@ -1,4 +1,4 @@
-import { JSONColumnType } from "kysely";
+import { Generated, JSONColumnType } from "kysely";
 
 export type Database = {
     agents: AgentsTable;
@@ -9,7 +9,7 @@ export type Database = {
 };
 
 type AgentsTable = {
-    id: number;
+    id: Generated<number>;
     email: string;
     organization: string;
     about: string | null;
@@ -28,7 +28,7 @@ type Os = "windows" | "linux" | "mac" | "android" | "ios";
 
 type SoftwareUsersTable = {
     softwareId: number;
-    agentId: string;
+    agentId: number;
     useCaseDescription: string;
     os: Os | null;
     version: string;
