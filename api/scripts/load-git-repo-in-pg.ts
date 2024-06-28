@@ -3,6 +3,7 @@ import { z } from "zod";
 import { createGitDbApi, GitDbApiParams } from "../src/core/adapters/dbApi/createGitDbApi";
 import { Database } from "../src/core/adapters/dbApi/kysely/kysely.database";
 import { createPgDialect } from "../src/core/adapters/dbApi/kysely/kysely.dialect";
+import { CompiledData } from "../src/core/ports/CompileData";
 import { Db } from "../src/core/ports/DbApi";
 import SoftwareRow = Db.SoftwareRow;
 
@@ -34,13 +35,16 @@ const saveGitDbInPostgres = async ({ pgConfig, gitDbConfig }: Params) => {
     });
     await insertInstances({
         instanceRows: instanceRows,
-        agentIdByEmail: agentIdByEmail,
         db: pgDb
     });
+
+    const compiledSoftwares = await gitDbApi.fetchCompiledData();
+    await insertCompiledSoftwares(compiledSoftwares, pgDb);
 };
 
 const insertSoftwares = async (softwareRows: SoftwareRow[], db: Kysely<Database>) => {
     console.info("Deleting than Inserting softwares");
+    console.info("Number of softwares to insert : ", softwareRows.length);
     await db.transaction().execute(async trx => {
         await trx.deleteFrom("softwares").execute();
         await trx
@@ -63,9 +67,9 @@ const insertSoftwares = async (softwareRows: SoftwareRow[], db: Kysely<Database>
 
 const insertAgents = async (agentRows: Db.AgentRow[], db: Kysely<Database>) => {
     console.log("Deleting than Inserting agents");
+    console.info("Number of agents to insert : ", agentRows.length);
     await db.transaction().execute(async trx => {
         await trx.deleteFrom("agents").execute();
-        console.log("number of agents to add : ", agentRows.length);
         await trx.insertInto("agents").values(agentRows).executeTakeFirst();
     });
 };
@@ -86,6 +90,7 @@ const insertSoftwareReferents = async ({
     db: Kysely<Database>;
 }) => {
     console.info("Deleting than Inserting software referents");
+    console.info("Number of software referents to insert : ", softwareReferentRows.length);
     await db.transaction().execute(async trx => {
         await trx.deleteFrom("software_referents").execute();
         await trx
@@ -110,6 +115,7 @@ const insertSoftwareUsers = async ({
     db: Kysely<Database>;
 }) => {
     console.info("Deleting than Inserting software users");
+    console.info("Number of software users to insert : ", softwareUserRows.length);
     await db.transaction().execute(async trx => {
         await trx.deleteFrom("software_users").execute();
         await trx
@@ -124,16 +130,9 @@ const insertSoftwareUsers = async ({
     });
 };
 
-const insertInstances = async ({
-    instanceRows,
-    agentIdByEmail,
-    db
-}: {
-    instanceRows: Db.InstanceRow[];
-    agentIdByEmail: Record<string, number>;
-    db: Kysely<Database>;
-}) => {
+const insertInstances = async ({ instanceRows, db }: { instanceRows: Db.InstanceRow[]; db: Kysely<Database> }) => {
     console.info("Deleting than Inserting instances");
+    console.info("Number of instances to insert : ", instanceRows.length);
     await db.transaction().execute(async trx => {
         await trx.deleteFrom("instances").execute();
         await trx
@@ -142,6 +141,32 @@ const insertInstances = async ({
                 instanceRows.map(row => ({
                     ...row,
                     otherSoftwareWikidataIds: JSON.stringify(row.otherSoftwareWikidataIds)
+                }))
+            )
+            .executeTakeFirst();
+    });
+};
+
+const insertCompiledSoftwares = async (
+    compiledSoftwares: CompiledData.Software<"private">[],
+    pgDb: Kysely<Database>
+) => {
+    console.info("Deleting than Inserting compiled softwares");
+    console.info("Number of compiled softwares to insert : ", compiledSoftwares.length);
+    await pgDb.transaction().execute(async trx => {
+        await trx.deleteFrom("compiled_softwares").execute();
+        await trx
+            .insertInto("compiled_softwares")
+            .values(
+                compiledSoftwares.map(software => ({
+                    softwareId: software.id,
+                    serviceProviders: JSON.stringify(software.serviceProviders),
+                    softwareExternalData: JSON.stringify(software.softwareExternalData),
+                    similarExternalSoftwares: JSON.stringify(software.similarExternalSoftwares),
+                    parentWikidataSoftware: JSON.stringify(software.parentWikidataSoftware),
+                    comptoirDuLibreSoftware: JSON.stringify(software.comptoirDuLibreSoftware),
+                    annuaireCnllServiceProviders: JSON.stringify(software.annuaireCnllServiceProviders),
+                    latestVersion: JSON.stringify(software.latestVersion)
                 }))
             )
             .executeTakeFirst();

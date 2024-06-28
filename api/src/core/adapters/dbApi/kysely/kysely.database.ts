@@ -1,4 +1,5 @@
 import { Generated, JSONColumnType } from "kysely";
+import type { PartialNoOptional } from "../../../../tools/PartialNoOptional";
 
 export type Database = {
     agents: AgentsTable;
@@ -6,6 +7,7 @@ export type Database = {
     software_users: SoftwareUsersTable;
     instances: InstancesTable;
     softwares: SoftwaresTable;
+    compiled_softwares: CompiledSoftwaresTable;
 };
 
 type AgentsTable = {
@@ -91,4 +93,97 @@ type SoftwaresTable = {
     addedByAgentEmail: string;
     logoUrl: string | null;
     keywords: JSONColumnType<string[]>;
+};
+
+// ---------- compiled data ----------
+
+type ComptoirDuLibreProvider = {
+    id: number;
+    url: string;
+    name: string;
+    type: string;
+    external_resources: {
+        website: string | null;
+    };
+};
+
+type ComptoirDuLibreUser = {
+    id: number;
+    url: string;
+    name: string;
+    type: string;
+    external_resources: {
+        website: string | null;
+    };
+};
+
+type ComptoirDuLibreSoftware = {
+    softwareId: number;
+    comptoirDuLibreId: number;
+    logoUrl: string | undefined;
+    keywords: string[] | undefined;
+    created: string;
+    modified: string;
+    url: string;
+    name: string;
+    licence: string;
+    external_resources: {
+        website: string | null;
+        repository: string | null;
+    };
+    providers: ComptoirDuLibreProvider[];
+    users: ComptoirDuLibreUser[];
+};
+
+type ServiceProvider = {
+    name: string;
+    website?: string;
+    cdlUrl?: string;
+    cnllUrl?: string;
+    siren?: string;
+};
+
+type ExternalDataDeveloper = {
+    name: string;
+    id: string;
+};
+
+type LocalizedString = string | Partial<Record<string, string>>;
+
+type SoftwareExternalData = {
+    externalId: string;
+    externalDataOrigin: "wikidata" | "HAL";
+    developers: ExternalDataDeveloper[];
+    label: LocalizedString;
+    description: LocalizedString;
+    isLibreSoftware: boolean;
+} & PartialNoOptional<{
+    logoUrl: string;
+    framaLibreId: string;
+    websiteUrl: string;
+    sourceUrl: string;
+    documentationUrl: string;
+    license: string;
+}>;
+
+type CompiledSoftwaresTable = {
+    softwareId: number;
+    serviceProviders: JSONColumnType<ServiceProvider[]>;
+    softwareExternalData: JSONColumnType<SoftwareExternalData> | null;
+    similarExternalSoftwares: JSONColumnType<
+        Pick<SoftwareExternalData, "externalId" | "label" | "description" | "isLibreSoftware" | "externalDataOrigin">[]
+    >;
+    parentWikidataSoftware: JSONColumnType<Pick<SoftwareExternalData, "externalId" | "label" | "description">> | null;
+    comptoirDuLibreSoftware: JSONColumnType<ComptoirDuLibreSoftware> | null;
+    annuaireCnllServiceProviders: JSONColumnType<
+        {
+            name: string;
+            siren: string;
+            url: string;
+        }[]
+    > | null;
+    latestVersion: JSONColumnType<{
+        semVer: string;
+        publicationTime: number;
+    }> | null;
 };
