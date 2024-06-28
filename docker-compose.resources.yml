@@ -18,7 +18,7 @@ services:
 #  To create an easy-to-use interface for PostgreSQL administration,
 #  you can use the Adminer web interface.
 #
-#  adminer:
-#    image: adminer
-#    ports:
-#      - "8090:8080"
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
