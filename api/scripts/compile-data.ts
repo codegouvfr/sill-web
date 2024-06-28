@@ -4,7 +4,8 @@ import { env } from "../src/env";
 (async () => {
     const { core } = await bootstrapCore({
         "keycloakUserApiParams": undefined,
-        "gitDbApiParams": {
+        "dbConfig": {
+            "dbKind": "git",
             "dataRepoSshUrl": "git@github.com:codegouvfr/sill-data.git",
             "sshPrivateKey": env.sshPrivateKeyForGit,
             "sshPrivateKeyName": env.sshPrivateKeyForGitName

@@ -1,4 +1,4 @@
-import type { GetSoftwareExternalDataOptions } from "../ports/GetSoftwareExternalDataOptions";
+import type { GetSoftwareExternalDataOptions } from "../../ports/GetSoftwareExternalDataOptions";
 import fetch from "node-fetch";
 import { freeSoftwareLicensesWikidataIds } from "./getWikidataSoftware";
 
